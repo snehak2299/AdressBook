@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.bridglab.addressbook;
 
 public class AddressBook {
@@ -32,6 +33,14 @@ public class AddressBook {
 	
 	public static void main(String[] args) {
 		System.out.println("welcome to address book program");
+=======
+package com.bridgelab.addressbook;
+
+public class AddressBook {
+
+	public static void main(String[] args) {
+		System.out.println("Welcome to address book program");
+>>>>>>> 924217e76c06144898623cc08bb04aefbe66c721
 
 	}
 
