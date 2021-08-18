@@ -33,7 +33,7 @@ import java.util.Scanner;
 		int totalRecords=0;
 		public static int j = 0;
 		public  Contacts[]contact = new Contacts[10];//to store the added contacts
-		public void addContact() {
+		public void addContact() {  // method to add contact
 			System.out.println("welcome to address book");	//welcome message
 			Scanner sc = new Scanner(System.in); // taking input
 			System.out.println("how many records you want to add:");
@@ -65,7 +65,7 @@ import java.util.Scanner;
 			
 			
 		}
-		public void editContact() {
+		public void editContact() {  // method to edit contact
 			System.out.println("enter the name you want to change");
 			Scanner sc = new Scanner (System.in);
 			String name = sc.nextLine();
@@ -130,6 +130,18 @@ import java.util.Scanner;
 			
 		}
 		
+		public void deleteContact() { //method to delete contact
+			System.out.println("enter the first name whos contact you want to delete" );
+			Scanner sc10 = new Scanner(System.in);
+			String name = sc10.nextLine();
+			for (int i=0;i<j;i++) {
+				if(contact[i].firstName.equals(name)&&contact[i]!=null) {
+					contact[i]=null;
+				}
+				System.out.println("contact is deleted");
+			}
+		}
+		
 	
 	
 	
@@ -145,7 +157,8 @@ import java.util.Scanner;
 			
 		case 2:
 			obj.editContact(); // edit contact
-			break;
+		case 3:
+			obj.deleteContact();		
 		}
 	}
 	}	
