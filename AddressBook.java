@@ -142,25 +142,54 @@ import java.util.Scanner;
 			}
 		}
 		
+		public void showContact() {  //method to show contact
+			if(contact.length==0) {
+				System.out.println("no contact present");
+			}
+			for( int i = 0 ; i < contact.length ; i++ ) {
+				if ( contact[i] != null ) {
+					System.out.println();
+					System.out.println("Firstname: " + contact[i].firstName);
+					System.out.println("Lastname: " + contact[i].lastName);
+					System.out.println("Address: " + contact[i].address);
+					System.out.println("State: " + contact[i].state);
+					System.out.println("City: " + contact[i].city);
+					System.out.println("Emailid: " + contact[i].email);
+					System.out.println("Zipcode: " + contact[i].zipCode);
+					System.out.println("Phone number: " + contact[i].phoneNumber);
+				}
+			}	
+		}
+		
 	
 	
 	
 	public static void main (String[]args) {
 		AddressBook obj=new AddressBook();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("options: 1) To add contacts"+ " 2) To edit contacts");
-		System.out.println("enter your option");
-		int option = sc.nextInt();
-		switch(option) {
-		case 1:
-			obj.addContact(); // add contact
+		while(true) {
+			System.out.println("options: 1) To add contacts"+ " 2) To edit contacts" + " 3) To delete contact" + " 4) To show contact");
+			System.out.println("enter your option");
+			int option = sc.nextInt();
+			switch(option) {
+			case 1:
+				obj.addContact(); // add contact
+				break;
+			case 2:
+				obj.editContact(); // edit contact
+				break;
+			case 3:
+				obj.deleteContact();
+				break;
+			case 4:
+				obj.showContact();
+				break;
+				
+			}
 			
-		case 2:
-			obj.editContact(); // edit contact
-		case 3:
-			obj.deleteContact();		
 		}
+		
 	}
-	}	
+}	
 		
 
