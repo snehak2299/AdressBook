@@ -96,10 +96,11 @@ import java.util.LinkedList;
 	}
 	
 	public class AddressBook {
-		public LinkedList<Contacts> addressbook=new LinkedList<Contacts>(); //created linked list
+		public static LinkedList<Contacts> addressbook=new LinkedList<Contacts>(); //created linked list
 		int totalRecords=0;
 		public static int j = 0;
 		public  Contacts[]contact = new Contacts[10];//to store the added contacts
+		
 		public void addContact() {  // method to add contact
 			System.out.println("welcome to address book");	//welcome message
 			Scanner sc = new Scanner(System.in); // taking input
@@ -132,9 +133,16 @@ import java.util.LinkedList;
 				
 				totalRecords--; 
 			}
-			
-			
-			
+				
+		}
+		public static boolean checkDuplicate(String newfname) { //check duplicate contact
+			for (int i=0;i<addressbook.size();i++) {
+				if(addressbook.get(i).firstName.equals(newfname)) {
+					System.out.println("cant add to addrses book alredy exist");
+				}
+				return true;
+			}
+			return false;	
 		}
 		public void editContact() {  // method to edit contact
 			System.out.println("enter the name you want to change");
@@ -248,6 +256,9 @@ import java.util.LinkedList;
 			int option = sc.nextInt();
 			switch(option) {
 			case 1:
+				if(checkDuplicate(firstName)) {
+					break;
+				}
 				obj.addContact(); // add contact
 				break;
 			case 2:
