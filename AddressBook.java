@@ -1,7 +1,8 @@
 
 package com.bridglab.addressbook;
 import java.util.Scanner;
-	
+import java.util.LinkedList;
+
 	class Contacts{
 		String firstName;
 		String lastName;
@@ -27,9 +28,75 @@ import java.util.Scanner;
 			System.out.println("contact added succesfully");
 			
 		}
+
+		public String getFirstName() {  //getters and setters
+			return firstName;
+		}
+
+		public void setFirstName(String firstName) {
+			this.firstName = firstName;
+		}
+
+		public String getLastName() {
+			return lastName;
+		}
+
+		public void setLastName(String lastName) {
+			this.lastName = lastName;
+		}
+
+		public String getAddress() {
+			return address;
+		}
+
+		public void setAddress(String address) {
+			this.address = address;
+		}
+
+		public String getCity() {
+			return city;
+		}
+
+		public void setCity(String city) {
+			this.city = city;
+		}
+
+		public String getState() {
+			return state;
+		}
+
+		public void setState(String state) {
+			this.state = state;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public int getZipCode() {
+			return zipCode;
+		}
+
+		public void setZipCode(int zipCode) {
+			this.zipCode = zipCode;
+		}
+
+		public int getPhoneNumber() {
+			return phoneNumber;
+		}
+
+		public void setPhoneNumber(int phoneNumber) {
+			this.phoneNumber = phoneNumber;
+		}
+		
 	}
 	
 	public class AddressBook {
+		public LinkedList<Contacts> addressbook=new LinkedList<Contacts>(); //created linked list
 		int totalRecords=0;
 		public static int j = 0;
 		public  Contacts[]contact = new Contacts[10];//to store the added contacts
@@ -58,7 +125,11 @@ import java.util.Scanner;
 				System.out.println("enter phone number:");
 				int phoneNumber = sc.nextInt(); 
 				//creating new object
-				contact[j++] = new Contacts(firstName,lastName,address,city,state, email,zipCode, phoneNumber);
+				Contacts addressBookCollection=new Contacts(firstName,lastName,address,city,state,email,
+						zipCode,phoneNumber);
+
+	            addressbook.add(addressBookCollection);
+				
 				totalRecords--; 
 			}
 			
@@ -69,8 +140,8 @@ import java.util.Scanner;
 			System.out.println("enter the name you want to change");
 			Scanner sc = new Scanner (System.in);
 			String name = sc.nextLine();
-			for (int i=0;i<j;i++) {
-				String confirm =(String)this.contact[i].firstName;
+			for (int i=0;i<addressbook.size();i++) {
+				String confirm =(String)this.addressbook.get(i).firstName;
 				if(confirm.equals(name)) {
 					boolean ck =true;
 					while (ck) {
@@ -83,45 +154,46 @@ import java.util.Scanner;
 						case 1:System.out.println("enter first name you want to change");
 					       Scanner sc2 = new Scanner(System.in);
 					       String newfn =sc2.nextLine();
-					       contact[i].firstName=newfn;
+					       addressbook.get(i).firstName=newfn;
 					       break;
 						case 2:System.out.println("enter last name you want to change");
 					       Scanner sc3 = new Scanner(System.in);
 					       String newln =sc3.nextLine();
-					       contact[i].lastName=newln;
+					       addressbook.get(i).lastName=newln;
 					       break; 
 						case 3:System.out.println("enter address you want to change");
 					       Scanner sc4 = new Scanner(System.in);
 					       String newadd =sc4.nextLine();
-					       contact[i].address=newadd;
+					       addressbook.get(i).address=newadd;
 					       break; 
 						case 4:System.out.println("enter city you want to change");
 					       Scanner sc5 = new Scanner(System.in);
 					       String newct =sc5.nextLine();
-					       contact[i].city=newct;
+					       addressbook.get(i).city=newct;
 					       break;
 						case 5:System.out.println("enter state you want to change");
 					       Scanner sc6 = new Scanner(System.in);
 					       String newst =sc6.nextLine();
-					       contact[i].state=newst;
+					       addressbook.get(i).city=newst;
 					       break;
 						case 6:System.out.println("enter new email");
 					       Scanner sc7 = new Scanner(System.in);
 					       String newem =sc7.nextLine();
-					       contact[i].email=newem;
+					       addressbook.get(i).email=newem;
 					       break;
 						case 7:System.out.println("enter new zipcode");
 					       Scanner sc8 = new Scanner(System.in);
 					       int newzc =sc8.nextInt();
-					       contact[i].zipCode=newzc;
+					       addressbook.get(i).zipCode=newzc;
 					       break;
 						case 8:System.out.println("enter new number");
 					       Scanner sc9 = new Scanner(System.in);
 					       int newpn =sc9.nextInt();
-					       contact[i].phoneNumber=newpn;
+					       addressbook.get(i).phoneNumber=newpn;
 					       break;
 						case 9:ck = false;
 						    System.out.println("changes are made");
+						    System.out.println();
 					       break;   
 						}
 					}
@@ -134,31 +206,34 @@ import java.util.Scanner;
 			System.out.println("enter the first name whos contact you want to delete" );
 			Scanner sc10 = new Scanner(System.in);
 			String name = sc10.nextLine();
-			for (int i=0;i<j;i++) {
-				if(contact[i].firstName.equals(name)&&contact[i]!=null) {
-					contact[i]=null;
+			for (int i=0;i< addressbook.size();i++) {
+				if(addressbook.get(i).firstName.equals(name)&&addressbook.get(i)!=null) {
+					addressbook.remove(i);
 				}
 				System.out.println("contact is deleted");
 			}
 		}
 		
 		public void showContact() {  //method to show contact
-			if(contact.length==0) {
+			if(addressbook.size()==0) {
 				System.out.println("no contact present");
+				System.out.println();
 			}
-			for( int i = 0 ; i < contact.length ; i++ ) {
-				if ( contact[i] != null ) {
-					System.out.println();
-					System.out.println("Firstname: " + contact[i].firstName);
-					System.out.println("Lastname: " + contact[i].lastName);
-					System.out.println("Address: " + contact[i].address);
-					System.out.println("State: " + contact[i].state);
-					System.out.println("City: " + contact[i].city);
-					System.out.println("Emailid: " + contact[i].email);
-					System.out.println("Zipcode: " + contact[i].zipCode);
-					System.out.println("Phone number: " + contact[i].phoneNumber);
-				}
+			for( int i = 0 ; i < addressbook.size() ; i++ ) {
+			
+					
+					System.out.println("Firstname: " +  addressbook.get(i).firstName);
+					System.out.println("Lastname: " + addressbook.get(i).lastName);
+					System.out.println("Address: " + addressbook.get(i).address);
+					System.out.println("State: " + addressbook.get(i).state);
+					System.out.println("City: " + addressbook.get(i).city);
+					System.out.println("Emailid: " + addressbook.get(i).email);
+					System.out.println("Zipcode: " + addressbook.get(i).zipCode);
+					System.out.println("Phone number: " + addressbook.get(i).phoneNumber);
+				
 			}	
+			
+
 		}
 		
 	
@@ -179,10 +254,10 @@ import java.util.Scanner;
 				obj.editContact(); // edit contact
 				break;
 			case 3:
-				obj.deleteContact();
+				obj.deleteContact(); //delete contact
 				break;
 			case 4:
-				obj.showContact();
+				obj.showContact(); //show contact
 				break;
 				
 			}
