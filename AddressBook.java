@@ -1,6 +1,7 @@
 
 package com.bridglab.addressbook;
 import java.util.Scanner;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 	class Contacts{
@@ -96,7 +97,10 @@ import java.util.LinkedList;
 	}
 	
 	public class AddressBook {
-		public static LinkedList<Contacts> addressbook=new LinkedList<Contacts>(); //created linked list
+		public static LinkedList<Contacts> addressbook=new LinkedList<Contacts>();
+		//created linked list
+		public static HashMap<String, String> addressCity = new HashMap<String,String>();
+		public static HashMap<String, String> addressState = new HashMap<String,String>();
 		int totalRecords=0;
 		public static int j = 0;
 		public  Contacts[]contact = new Contacts[10];//to store the added contacts
@@ -243,7 +247,7 @@ import java.util.LinkedList;
 			
 
 		}
-		public void searchByCity() {
+		public void searchByCity() { // method to search by city
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Search According to city");
 			System.out.println("Enter the city");
@@ -259,7 +263,7 @@ import java.util.LinkedList;
 				
 			}
 		}
-		public void searchByState() {
+		public void searchByState() {  //method to search by state
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Search According to State");
 			System.out.println("Enter the state");
@@ -275,6 +279,22 @@ import java.util.LinkedList;
 				
 			}
 		}
+		public void viewPersons() {
+			Scanner sc = new Scanner(System.in);
+			System.out.println(" 1.City 2.State");
+			int choice = sc.nextInt();
+			if (choice==1) {
+				for(String i: addressCity.keySet()) {
+					System.out.println(i +" city " + addressCity.get(i));
+				}
+			}
+			else {
+				for(String i: addressState.keySet()) {
+					System.out.println(i +"  state " + addressState.get(i));
+				}
+			}
+		}
+
 	
 	
 	
@@ -282,7 +302,7 @@ import java.util.LinkedList;
 		AddressBook obj=new AddressBook();
 		Scanner sc = new Scanner(System.in);
 		while(true) {
-			System.out.println("options: 1) To add contacts"+ " 2) To edit contacts" + " 3) To delete contact" + " 4) To show contact" +" 5) serach according to state" +" 5) serach according to city");
+			System.out.println("options: 1) To add contacts"+ " 2) To edit contacts" + " 3) To delete contact" + " 4) To show contact" +" 5) serach according to state" +" 6) serach according to city"+" 7)view person by city and state");
 			System.out.println("enter your option");
 			int option = sc.nextInt();
 			switch(option) {
@@ -303,6 +323,9 @@ import java.util.LinkedList;
 				break;
 			case 6:
 				obj.searchByCity(); //search by city
+				break;
+			case 7:
+				obj.viewPersons(); // dictionory
 				break;
 			}
 			
