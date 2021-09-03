@@ -243,7 +243,38 @@ import java.util.LinkedList;
 			
 
 		}
-		
+		public void searchByCity() {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Search According to city");
+			System.out.println("Enter the city");
+			String stateName = sc.next();
+			for(int j = 0;j<addressbook.size();j++) {
+				
+					if (addressbook.get(j).city.equals(stateName)) {
+						System.out.println(addressbook.get(j).firstName + " " + addressbook.get(j).lastName);
+					}
+					else {
+						System.out.println("no contact found");
+					}
+				
+			}
+		}
+		public void searchByState() {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Search According to State");
+			System.out.println("Enter the state");
+			String stateName = sc.next();
+			for(int j = 0;j<addressbook.size();j++) {
+				
+					if (addressbook.get(j).state.equals(stateName)) {
+						System.out.println(addressbook.get(j).firstName + " " + addressbook.get(j).lastName);
+					}
+					else {
+						System.out.println("no contact found");
+					}
+				
+			}
+		}
 	
 	
 	
@@ -251,14 +282,11 @@ import java.util.LinkedList;
 		AddressBook obj=new AddressBook();
 		Scanner sc = new Scanner(System.in);
 		while(true) {
-			System.out.println("options: 1) To add contacts"+ " 2) To edit contacts" + " 3) To delete contact" + " 4) To show contact");
+			System.out.println("options: 1) To add contacts"+ " 2) To edit contacts" + " 3) To delete contact" + " 4) To show contact" +" 5) serach according to state" +" 5) serach according to city");
 			System.out.println("enter your option");
 			int option = sc.nextInt();
 			switch(option) {
 			case 1:
-				if(checkDuplicate(firstName)) {
-					break;
-				}
 				obj.addContact(); // add contact
 				break;
 			case 2:
@@ -270,7 +298,12 @@ import java.util.LinkedList;
 			case 4:
 				obj.showContact(); //show contact
 				break;
-				
+			case 5:
+				obj.searchByState(); //search by state
+				break;
+			case 6:
+				obj.searchByCity(); //search by city
+				break;
 			}
 			
 		}
