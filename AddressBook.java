@@ -2,8 +2,11 @@
 package com.bridglab.addressbook;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.stream.*;
+import java.util.stream.Stream;
 
 	class Contacts{
 		String firstName;
@@ -94,6 +97,7 @@ import java.util.LinkedList;
 		public void setPhoneNumber(int phoneNumber) {
 			this.phoneNumber = phoneNumber;
 		}
+
 		
 	}
 	
@@ -102,7 +106,7 @@ import java.util.LinkedList;
 		//created linked list
 		public static HashMap<String, String> addressCity = new HashMap<String,String>();
 		public static HashMap<String, String> addressState = new HashMap<String,String>();
-		public static ArrayList<ArrayList<AddressBook>> mainArr= new ArrayList<ArrayList<AddressBook>>();
+		public static ArrayList<ArrayList<Contacts>> mainArr= new ArrayList<ArrayList<Contacts>>();
 		int totalRecords=0;
 		public static int j = 0;
 		public  Contacts[]contact = new Contacts[10];//to store the added contacts
@@ -255,17 +259,17 @@ import java.util.LinkedList;
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Search According to city");
 			System.out.println("Enter the city");
-			String stateName = sc.next();
-			for(int j = 0;j<addressbook.size();j++) {
-				
-					if (addressbook.get(j).city.equals(stateName)) {
-						System.out.println(addressbook.get(j).firstName + " " + addressbook.get(j).lastName);
-					}
-					else {
-						System.out.println("no contact found");
-					}
-				
-			}
+			String cityName = sc.next();
+			for (int i = 0; i < addressbook.size(); i++) {
+				mainArr.stream().forEach(n->{
+					for (Contacts contactBook : n) {
+						if (contactBook.city.equals(cityName))
+							System.out.println(contactBook.firstName+" "+contactBook.lastName);
+						else
+							System.out.println("No contact found");
+					}});
+	            }
+			
 		}
 		public void searchByState() {  //method to search by state
 			Scanner sc = new Scanner(System.in);
@@ -273,14 +277,14 @@ import java.util.LinkedList;
 			System.out.println("Enter the state");
 			String stateName = sc.next();
 			for(int j = 0;j<addressbook.size();j++) {
-				
-					if (addressbook.get(j).state.equals(stateName)) {
-						System.out.println(addressbook.get(j).firstName + " " + addressbook.get(j).lastName);
-					}
-					else {
-						System.out.println("no contact found");
-					}
-				
+				mainArr.stream().forEach(n->{
+					for (Contacts contactBook : n) {
+						if (contactBook.city.equals(stateName)) 
+							System.out.println(contactBook.firstName+" "+contactBook.lastName);
+						else
+							System.out.println("No contact found");
+					}});
+	            
 			}
 		}
 		public void viewPersons() {  //view person by state or city using stream
