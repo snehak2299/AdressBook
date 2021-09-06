@@ -305,16 +305,13 @@ import java.util.stream.Stream;
 		
 		public int noOfContact() { // number of contatct by city or state
 			int cityCount=0,stateCount=0;
-		
+			Scanner sc12= new Scanner(System.in);
+			String state2 = sc12.next();
 			for(int i=0;i<addressbook.size();i++) {
 				String firstName = addressbook.get(i).firstName;
 				if(addressbook.contains(firstName)) {
-					cityCount++;
-					return cityCount;
-				}else if(addressbook.contains(firstName)) {
+					System.out.println(mainArr.stream().filter(addressbook -> state2.equals("mh")).count());
 					
-						stateCount++;
-						return stateCount;
 				}
 			}
 			return 0;
