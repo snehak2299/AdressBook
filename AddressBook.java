@@ -303,14 +303,15 @@ import java.util.stream.Stream;
 			}
 		}
 		
-		public int noOfContact(String name) {
+		public int noOfContact() { // number of contatct by city or state
 			int cityCount=0,stateCount=0;
 		
 			for(int i=0;i<addressbook.size();i++) {
-				if(addressbook.contains(name)) {
+				String firstName = addressbook.get(i).firstName;
+				if(addressbook.contains(firstName)) {
 					cityCount++;
 					return cityCount;
-				}else if(addressbook.contains(name)) {
+				}else if(addressbook.contains(firstName)) {
 					
 						stateCount++;
 						return stateCount;
@@ -328,6 +329,7 @@ import java.util.stream.Stream;
 		Scanner sc = new Scanner(System.in);
 		while(true) {
 			System.out.println("options: 1) To add contacts"+ " 2) To edit contacts" + " 3) To delete contact" + " 4) To show contact" +" 5) serach according to state" +" 6) serach according to city"+" 7)view person by city and state");
+			System.out.println(" 8)count number of contacts");
 			System.out.println("enter your option");
 			int option = sc.nextInt();
 			switch(option) {
@@ -351,6 +353,9 @@ import java.util.stream.Stream;
 				break;
 			case 7:
 				obj.viewPersons(); // Dictionary
+				break;
+			case 8:
+				obj.noOfContact(); //number of contact according to city or state
 				break;
 			}
 			
