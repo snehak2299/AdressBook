@@ -1,6 +1,7 @@
 
 package com.bridglab.addressbook;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -101,6 +102,7 @@ import java.util.LinkedList;
 		//created linked list
 		public static HashMap<String, String> addressCity = new HashMap<String,String>();
 		public static HashMap<String, String> addressState = new HashMap<String,String>();
+		public static ArrayList<ArrayList<AddressBook>> mainArr= new ArrayList<ArrayList<AddressBook>>();
 		int totalRecords=0;
 		public static int j = 0;
 		public  Contacts[]contact = new Contacts[10];//to store the added contacts
@@ -139,14 +141,23 @@ import java.util.LinkedList;
 			}
 				
 		}
-		public static boolean checkDuplicate(String newfname) { //check duplicate contact
-			for (int i=0;i<addressbook.size();i++) {
-				if(addressbook.get(i).firstName.equals(newfname)) {
-					System.out.println("cant add to addrses book alredy exist");
-				}
-				return true;
+	//	public static boolean checkDuplicate(String newfname) { //check duplicate contact
+	//		for (int i=0;i<addressbook.size();i++) {
+	//			if(addressbook.get(i).firstName.equals(newfname)) {
+	//				System.out.println("cant add to addrses book alredy exist");
+	//			}
+	//			return true;
+	//		}
+	//		return false;	
+	//	}
+		 
+		public static boolean duplicateChecker(String name, ArrayList<AddressBook> arr) {
+			ArrayList<String> duplicateCheck = new ArrayList<>();
+			for(int i=0;i<arr.size();i++) {
+				duplicateCheck.add(arr.get(i).firstName+" "+arr.get(i).lastName);
 			}
-			return false;	
+			if (duplicateCheck.stream().anyMatch(n-> name.equals(n))) return true;
+			return false;
 		}
 		public void editContact() {  // method to edit contact
 			System.out.println("enter the name you want to change");
@@ -279,7 +290,7 @@ import java.util.LinkedList;
 				
 			}
 		}
-		public void viewPersons() {
+		public void viewPersons() {  //view person by state or city
 			Scanner sc = new Scanner(System.in);
 			System.out.println(" 1.City 2.State");
 			int choice = sc.nextInt();
@@ -293,6 +304,22 @@ import java.util.LinkedList;
 					System.out.println(i +"  state " + addressState.get(i));
 				}
 			}
+		}
+		public int noOfContact(String name) {
+			int cityCount=0,stateCount=0;
+		
+			for(int i=0;i<addressbook.size();i++) {
+				if(addressbook.contains(name)) {
+					cityCount++;
+					return cityCount;
+				}else if(addressbook.contains(name)) {
+					
+						stateCount++;
+						return stateCount;
+				}
+			}
+			return 0;
+			
 		}
 
 	
@@ -325,7 +352,7 @@ import java.util.LinkedList;
 				obj.searchByCity(); //search by city
 				break;
 			case 7:
-				obj.viewPersons(); // dictionory
+				obj.viewPersons(); // Dictionary
 				break;
 			}
 			
