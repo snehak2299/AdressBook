@@ -151,14 +151,7 @@ import java.util.LinkedList;
 	//		return false;	
 	//	}
 		 
-		public static boolean duplicateChecker(String name, ArrayList<AddressBook> arr) {
-			ArrayList<String> duplicateCheck = new ArrayList<>();
-			for(int i=0;i<arr.size();i++) {
-				duplicateCheck.add(arr.get(i).firstName+" "+arr.get(i).lastName);
-			}
-			if (duplicateCheck.stream().anyMatch(n-> name.equals(n))) return true;
-			return false;
-		}
+		
 		public void editContact() {  // method to edit contact
 			System.out.println("enter the name you want to change");
 			Scanner sc = new Scanner (System.in);
@@ -290,21 +283,22 @@ import java.util.LinkedList;
 				
 			}
 		}
-		public void viewPersons() {  //view person by state or city
+		public void viewPersons() {  //view person by state or city using stream
 			Scanner sc = new Scanner(System.in);
 			System.out.println(" 1.City 2.State");
 			int choice = sc.nextInt();
 			if (choice==1) {
-				for(String i: addressCity.keySet()) {
-					System.out.println(i +" city " + addressCity.get(i));
-				}
+				addressCity.keySet().stream().forEach(n -> {
+	                System.out.println(n + " lives in: " + addressCity.get(n));
+	            });
 			}
 			else {
-				for(String i: addressState.keySet()) {
-					System.out.println(i +"  state " + addressState.get(i));
-				}
+				addressState.keySet().stream().forEach(n -> {
+	                System.out.println(n + " lives in: " + addressState.get(n));
+	            });
 			}
 		}
+		
 		public int noOfContact(String name) {
 			int cityCount=0,stateCount=0;
 		
