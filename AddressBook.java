@@ -2,12 +2,9 @@
 package com.bridglab.addressbook;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.stream.*;
-import java.util.stream.Stream;
-
+import java.util.Collections;
 	class Contacts{
 		String firstName;
 		String lastName;
@@ -145,15 +142,6 @@ import java.util.stream.Stream;
 			}
 				
 		}
-	//	public static boolean checkDuplicate(String newfname) { //check duplicate contact
-	//		for (int i=0;i<addressbook.size();i++) {
-	//			if(addressbook.get(i).firstName.equals(newfname)) {
-	//				System.out.println("cant add to addrses book alredy exist");
-	//			}
-	//			return true;
-	//		}
-	//		return false;	
-	//	}
 		 
 		
 		public void editContact() {  // method to edit contact
@@ -317,6 +305,9 @@ import java.util.stream.Stream;
 			return 0;
 			
 		}
+		public  void sorteByName() {
+			mainArr.stream().forEach(n-> Collections.sort(n, new AddressBook()));
+		}
 
 	
 	
@@ -326,7 +317,7 @@ import java.util.stream.Stream;
 		Scanner sc = new Scanner(System.in);
 		while(true) {
 			System.out.println("options: 1) To add contacts"+ " 2) To edit contacts" + " 3) To delete contact" + " 4) To show contact" +" 5) serach according to state" +" 6) serach according to city"+" 7)view person by city and state");
-			System.out.println(" 8)count number of contacts");
+			System.out.println(" 8)count number of contacts" + "9)sort according to first name");
 			System.out.println("enter your option");
 			int option = sc.nextInt();
 			switch(option) {
@@ -354,6 +345,9 @@ import java.util.stream.Stream;
 			case 8:
 				obj.noOfContact(); //number of contact according to city or state
 				break;
+			case 9:
+				obj.sorteByName(); //sort according to name
+				break;	
 			}
 			
 		}
