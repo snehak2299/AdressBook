@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Collections;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 	class Contacts{
 		String firstName;
 		String lastName;
@@ -243,6 +246,7 @@ import java.util.Collections;
 			
 
 		}
+	
 		public void searchByCity() { // method to search by city
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Search According to city");
@@ -305,10 +309,29 @@ import java.util.Collections;
 			return 0;
 			
 		}
-		public  void sorteByName() {
-			mainArr.stream().forEach(n-> Collections.sort(n, new AddressBook()));
-		}
+		public void sortByCityZState() {
+	        Scanner sc = new Scanner(System.in);
+	        System.out.println("Enter to Search According to 1.City 2.State");
+	        int input = sc.nextInt();
+	        switch(input) {
+	            case 1:
+	                for (int i = 0; i < addressbook.size(); i++) {
+	                    List sortedListCity= addressbook.get(i).stream().sorted(((contact1, contact2) -> contact1.City.compareTo(contact2.City))).collect(Collectors.toList());
+	                    System.out.println(sortedListCity);
 
+	                }
+	                break;
+
+	            case 2:
+	                for (int i = 0; i < addressbook.size(); i++) {
+	                    List sortedListState=addressbook.get(i).stream().sorted(((contact1, contact2) -> contact1.State.compareTo(contact2.State))).collect(Collectors.toList());
+	                    System.out.println(sortedListState);
+
+	                }
+	                break;
+	        }
+	    }
+	
 	
 	
 	
@@ -317,7 +340,7 @@ import java.util.Collections;
 		Scanner sc = new Scanner(System.in);
 		while(true) {
 			System.out.println("options: 1) To add contacts"+ " 2) To edit contacts" + " 3) To delete contact" + " 4) To show contact" +" 5) serach according to state" +" 6) serach according to city"+" 7)view person by city and state");
-			System.out.println(" 8)count number of contacts" + "9)sort according to first name");
+			System.out.println(" 8)count number of contacts" + "9)sort according to first name"+ "10)sort by city  and state");
 			System.out.println("enter your option");
 			int option = sc.nextInt();
 			switch(option) {
@@ -347,6 +370,9 @@ import java.util.Collections;
 				break;
 			case 9:
 				obj.sorteByName(); //sort according to name
+				break;
+			case 10:
+				obj.sorteByCityState(); //sort according to city and name
 				break;	
 			}
 			
