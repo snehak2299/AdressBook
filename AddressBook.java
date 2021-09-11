@@ -245,7 +245,46 @@ class AddressBookL
                 pattern = "";
                 break;
         }
-        
+        String newData = takeInput("new data of the field", pattern);
+        String newContent = "";
+        for (int i = 0; i < arrayList.size(); i++) 
+        {
+            if (i == field) 
+            {
+                arrayList.add(i, newData);
+            }
+            newContent += arrayList.get(i) + "\n";
+        }
+        String option;
+        do 
+        {
+            System.out.println("enter... S for SAVE     SA for SAVE AS      C for CANCEL");
+            option = scanner.nextLine().trim().toLowerCase();
+
+        } while (!(option.equals("s") || option.equals("sa")) || option.equals("c"));
+
+        switch (option) 
+        {
+            // the field is updated in the same file
+            case "s":
+                writeFile(contactName, newContent);
+                System.out.println(contactName + " is edited successfully");
+                break;
+            // the field is updated in givenfilenamewithoutextension.csv file
+            case "sa":
+                String extension = ".csv";
+                String newContactName = contactName.replaceFirst("[.][^.]+$", "") + extension;
+                writeFile(newContactName, newContent);
+                nonEmptyContacts.add(newContactName);
+                System.out.println("changes are saved successfully in " + newContactName + " file");
+                break;
+            case "c":
+                System.out.println("changes are not saved");
+                return;
+            default:
+                System.out.println("please select either S or SA or C");
+                break;
+        }
     }
     void deleteContact()
     {
