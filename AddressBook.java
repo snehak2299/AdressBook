@@ -270,9 +270,9 @@ class AddressBookL
                 writeFile(contactName, newContent);
                 System.out.println(contactName + " is edited successfully");
                 break;
-            // the field is updated in givenfilenamewithoutextension.csv file
+            // the field is updated in givenfilenamewithoutextension.json file
             case "sa":
-                String extension = ".csv";
+                String extension = ".json";
                 String newContactName = contactName.replaceFirst("[.][^.]+$", "") + extension;
                 writeFile(newContactName, newContent);
                 nonEmptyContacts.add(newContactName);
